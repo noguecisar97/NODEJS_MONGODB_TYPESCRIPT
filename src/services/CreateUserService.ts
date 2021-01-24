@@ -1,5 +1,4 @@
 import md5 from 'md5';
-import User from '../models/User';
 import UsersRepository from '../repositories/UserRepository';
 
 interface RequestDTO {
