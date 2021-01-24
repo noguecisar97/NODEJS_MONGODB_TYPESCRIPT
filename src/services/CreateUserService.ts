@@ -3,12 +3,17 @@ import User from '../models/User';
 import UsersRepository from '../repositories/UserRepository';
 
 interface RequestDTO {
-  email: string;
-  password: string;
+  emailReq: string;
+  passwordReq: string;
 }
 
 interface Err {
   error: string;
+}
+
+interface ResponseDTO {
+  id: string;
+  email: string;
 }
 
 class CreatUserService {
@@ -18,23 +23,33 @@ class CreatUserService {
     this.usersRepository = userRepository;
   }
 
-  public async execute({ email, password }: RequestDTO): Promise<User | Err> {
+  public async execute({
+    emailReq,
+    passwordReq,
+  }: RequestDTO): Promise<ResponseDTO | Err> {
     // md5 encrypts the passed password
-    const passwordhash = md5(password);
+    const passwordhash = md5(passwordReq);
 
     const findUser = await this.usersRepository.findByUser({
-      email,
+      email: emailReq,
       password: passwordhash,
     });
 
     if (findUser) return { error: 'This user is already created' };
 
     const user = await this.usersRepository.create({
-      email,
+      email: emailReq,
       password: passwordhash,
     });
 
-    return user;
+    const { id, email } = user;
+
+    const profile: ResponseDTO = {
+      id,
+      email,
+    };
+
+    return profile;
   }
 }
 

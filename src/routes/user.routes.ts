@@ -21,7 +21,10 @@ mongodb.connect(error => {
 
       const createUser = new CreateUserService(userRepository);
 
-      const user = await createUser.execute({ email, password });
+      const user = await createUser.execute({
+        emailReq: email,
+        passwordReq: password,
+      });
 
       return response.json(user);
     } catch (err) {

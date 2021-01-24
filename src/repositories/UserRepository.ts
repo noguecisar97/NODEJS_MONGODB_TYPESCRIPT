@@ -1,4 +1,4 @@
-import { Cursor, Db } from 'mongodb';
+import { Db } from 'mongodb';
 import User from '../models/User';
 
 interface CreateUserDTO {
