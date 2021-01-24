@@ -7,7 +7,7 @@ import FindUsersService from '../services/FindUsersService';
 
 const userRouter = Router();
 const mongodb = new MongoClient(
-  'mongodb+srv://JULIOCESAR:07101997@cluster0.0snwu.mongodb.net/users?retryWrites=true&w=majority',
+  'URL',
   { useUnifiedTopology: true },
 );
 
