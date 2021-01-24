@@ -1,5 +1,12 @@
 import UsersRepository from '../repositories/UserRepository';
 
+interface MongodbDTO {
+  _id: string;
+  id: string;
+  email: string;
+  password: string;
+}
+
 class FindUsersService {
   private usersRepository: UsersRepository;
 
@@ -7,7 +14,7 @@ class FindUsersService {
     this.usersRepository = userRepository;
   }
 
-  public async execute() {
+  public async execute(): Promise<Pick<MongodbDTO, 'email' | 'password'>[]> {
     const users = await this.usersRepository.findAllUsers();
     return users;
   }
