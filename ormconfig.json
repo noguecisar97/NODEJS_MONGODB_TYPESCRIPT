@@ -1,0 +1,16 @@
+{
+  "type":"mongodb",
+  "url": "mongodb+srv://JULIOCESAR:07101997@cluster0.0snwu.mongodb.net/gobarber?retryWrites=true&w=majority",
+  "host":"mongodb+srv://cluster0.0snwu.mongodb.net/gobarber",
+  "port": 27017,
+  "username": "JULIOCESAR",
+  "password": "07101997",
+  "database": "gobarber",
+  "useUnifiedTopology": true, 
+  "migrations": [
+    "./src/database/migrations/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
+}

@@ -11,6 +11,7 @@
     "express": "^4.17.1",
     "md5": "^2.3.0",
     "mongodb": "^3.6.3",
+    "typeorm": "^0.2.30",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
