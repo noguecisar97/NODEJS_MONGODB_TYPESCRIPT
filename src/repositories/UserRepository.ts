@@ -1,8 +1,14 @@
 import { Cursor, Db } from 'mongodb';
-import md5 from 'md5';
 import User from '../models/User';
 
 interface CreateUserDTO {
+  email: string;
+  password: string;
+}
+
+interface MongodbDTO {
+  _id: string;
+  id: string;
   email: string;
   password: string;
 }
@@ -17,10 +23,7 @@ class UserRepository {
 
   // inserting user in the database
   public async create({ email, password }: CreateUserDTO): Promise<User> {
-    // md5 encrypts the passed password
-    const passwordhash = md5(password);
-
-    const user = new User({ email, password: passwordhash });
+    const user = new User({ email, password });
 
     this.users.collection('user').insertOne(user);
 
@@ -32,9 +35,7 @@ class UserRepository {
     email,
     password,
   }: CreateUserDTO): Promise<User | null> {
-    // md5 encrypts the passed password
-    const passwordhash = md5(password);
-    const user = new User({ email, password: passwordhash });
+    const user = new User({ email, password });
     let findUser: User | null = null;
 
     await this.users
@@ -47,15 +48,18 @@ class UserRepository {
     return findUser ? user : null;
   }
 
-  public async findAllUsers(): Promise<User[] | Cursor> {
-    const findUsers: User[] | [] = [];
-    await this.users
+  public async findAllUsers(): Promise<
+    Pick<MongodbDTO, 'email' | 'password'>[]
+  > {
+    const users = await this.users
       .collection('user')
-      .find()
-      .toArray((err, docs) => {
-        if (err) console.log(err);
-        console.log(docs);
-      });
+      .find({}, { projection: { _id: 0, password: 0 } });
+
+    if ((await users.count()) === 0) {
+      return [];
+    }
+    const findUsers: Omit<MongodbDTO, 'id' | '_id'>[] = [];
+    await users.forEach(doc => findUsers.push(doc));
 
     return findUsers;
   }

@@ -1,16 +1,13 @@
 import { Router } from 'express';
-import { MongoClient } from 'mongodb';
+import mongodb from '../data/Mongo';
 import UserRepository from '../repositories/UserRepository';
 
 import CreateUserService from '../services/CreateUserService';
 import FindUsersService from '../services/FindUsersService';
 
 const userRouter = Router();
-const mongodb = new MongoClient(
-  'mongodb+srv://JULIOCESAR:07101997@cluster0.0snwu.mongodb.net/users?retryWrites=true&w=majority',
-  { useUnifiedTopology: true },
-);
 
+// connect with database
 mongodb.connect(error => {
   if (error) throw Error(error.message);
 
@@ -32,13 +29,13 @@ mongodb.connect(error => {
     }
   });
 
-  userRouter.get('/', (req, res) => {
+  userRouter.get('/', async (req, res) => {
     try {
       const findUser = new FindUsersService(userRepository);
 
-      const user = findUser.execute();
+      const user = await findUser.execute();
 
-      return res.status(200).json({ user });
+      return res.status(200).json(user);
     } catch (err) {
       return res.status(400).json({ error: err.message });
     }

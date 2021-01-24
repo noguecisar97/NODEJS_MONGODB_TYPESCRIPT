@@ -1,4 +1,3 @@
-import User from '../models/User';
 import UsersRepository from '../repositories/UserRepository';
 
 class FindUsersService {
@@ -8,8 +7,9 @@ class FindUsersService {
     this.usersRepository = userRepository;
   }
 
-  public execute() {
-    return this.usersRepository.findAllUsers();
+  public async execute() {
+    const users = await this.usersRepository.findAllUsers();
+    return users;
   }
 }
 
