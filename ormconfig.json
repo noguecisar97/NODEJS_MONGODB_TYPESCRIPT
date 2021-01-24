@@ -1,16 +1,25 @@
 {
   "type":"mongodb",
-  "url": "mongodb+srv://JULIOCESAR:07101997@cluster0.0snwu.mongodb.net/gobarber?retryWrites=true&w=majority",
-  "host":"mongodb+srv://cluster0.0snwu.mongodb.net/gobarber",
+  "url": "mongodb+srv://JULIOCESAR:07101997@cluster0.0snwu.mongodb.net/users?retryWrites=true&w=majority",
+  "host":"mongodb+srv://cluster0.0snwu.mongodb.net/users",
   "port": 27017,
   "username": "JULIOCESAR",
   "password": "07101997",
-  "database": "gobarber",
+  "database": "users",
   "useUnifiedTopology": true, 
+  "synchronize": true,
   "migrations": [
     "./src/database/migrations/*.ts"
   ],
+  "entities": [
+    "./src/models/*.ts"
+  ],
+  "subscribers": [
+    "src/subscriber/**/*.ts"
+  ],
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "./src/database/migrations",
+    "entitiesDir": "./src/models",
+    "subscribersDir": "src/subscriber"
   }
 }

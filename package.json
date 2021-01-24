@@ -5,12 +5,14 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev:server": "ts-node-dev --inspect --transpile-only --ignore node_modules src/server.ts"
+    "dev:server": "ts-node-dev --inspect --transpile-only --ignore node_modules src/server.ts",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "express": "^4.17.1",
     "md5": "^2.3.0",
     "mongodb": "^3.6.3",
+    "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.30",
     "uuid": "^8.3.2"
   },

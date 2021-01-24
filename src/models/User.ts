@@ -1,17 +1,24 @@
-import { v4 } from 'uuid';
+import { ObjectID } from 'mongodb';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ObjectIdColumn,
+} from 'typeorm';
 
+@Entity('User')
 class User {
+  @ObjectIdColumn()
+  _id: ObjectID;
+
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
   email: string;
 
+  @Column()
   password: string;
-
-  constructor({ email, password }: Omit<User, 'id'>) {
-    this.id = v4();
-    this.email = email;
-    this.password = password;
-  }
 }
 
 export default User;
