@@ -15,7 +15,7 @@ class CreatUserService {
     // md5 encrypts the passed password
     const passwordhash = md5(password);
 
-    const findUser = await usersRepository.findByUser(email);
+    const findUser = await usersRepository.findByEmail(email);
 
     if (findUser) throw Error('This user is already created');
 
