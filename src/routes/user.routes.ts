@@ -2,10 +2,10 @@ import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 import UserRepository from '../repositories/UserRepository';
 
-import CreateUserService from '../services/CreateUserService';
-import AlterUserService from '../services/AlterUserService';
-import AuthUserService from '../services/AuthUserService';
-import DeleteUserService from '../services/DeleteUserService';
+import CreateUserService from '../services/User/CreateUserService';
+import AlterUserService from '../services/User/AlterUserService';
+import AuthUserService from '../services/User/AuthUserService';
+import DeleteUserService from '../services/User/DeleteUserService';
 
 const userRouter = Router();
 

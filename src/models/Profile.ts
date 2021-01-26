@@ -5,21 +5,30 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToOne,
 } from 'typeorm';
 
+import User from './User';
+
+/**
+ * Um para Um (OneToOne)
+ * Um para Muitos (OneToMany)
+ * Muitos para Muitos (ManyToMany)
+ */
+
 @Entity()
-export default class User {
+export default class Profile {
   @ObjectIdColumn()
   _id: ObjectID;
 
   @Column()
-  id: string;
+  userID: string;
 
   @Column()
-  email: string;
+  nick: string;
 
   @Column()
-  password: string;
+  elo: string;
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;

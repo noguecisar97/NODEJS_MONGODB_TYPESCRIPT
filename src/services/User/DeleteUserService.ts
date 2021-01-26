@@ -1,9 +1,10 @@
 import { getCustomRepository } from 'typeorm';
-import User from '../models/User';
-import UsersRepository from '../repositories/UserRepository';
+import UsersRepository from '../../repositories/UserRepository';
 
 class DeleteUserService {
-  public async execute(id: string, email: string): Promise<User | undefined> {
+  public async execute(id: string, email: string): Promise<void> {
+    if (!(id && email)) throw Error('Fields are missing');
+
     const DeleteUser = getCustomRepository(UsersRepository);
 
     const existUser = await DeleteUser.findOne({ id, email });
@@ -15,8 +16,6 @@ class DeleteUserService {
     const user = await DeleteUser.findOne({ id, email });
 
     if (user) throw Error('User not deleted');
-
-    return user;
   }
 }
 
