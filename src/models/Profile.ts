@@ -5,10 +5,7 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToOne,
 } from 'typeorm';
-
-import User from './User';
 
 /**
  * Um para Um (OneToOne)
